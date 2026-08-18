@@ -2,9 +2,9 @@
 
 import { useRef, useState } from "react";
 import { motion } from "motion/react";
-import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { useSiteMotion } from "./MotionPreferences";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -17,6 +17,38 @@ const steps = [
   { number: "05", short: "Review", title: "Review the gap", text: "Return to the exact point of confusion, revise it clearly, and try again with purpose.", symbol: "↻" },
 ];
 
+type Step = (typeof steps)[number];
+
+function StoryPanel({ step, animated = false }: { step: Step; animated?: boolean }) {
+  const content = (
+    <>
+      <div className="story-symbol" aria-hidden="true">
+        <span>{step.symbol}</span>
+        <i className="story-orbit one" /><i className="story-orbit two" />
+        <b className="story-visual-mark" />
+      </div>
+      <div className="story-copy">
+        <span className="panel-index">{step.number} / 05</span>
+        <h3>{step.title}</h3>
+        <p>{step.text}</p>
+      </div>
+    </>
+  );
+
+  if (!animated) return <article className="story-panel">{content}</article>;
+
+  return (
+    <motion.article
+      className="story-panel story-panel-active"
+      initial={{ opacity: 1, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: .38, ease: [0.23, 1, 0.32, 1] }}
+    >
+      {content}
+    </motion.article>
+  );
+}
+
 export default function LearningStory() {
   const root = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
@@ -26,85 +58,50 @@ export default function LearningStory() {
 
   useGSAP(() => {
     if (reducedMotion) return;
-
     const mm = gsap.matchMedia();
-    mm.add("(min-width: 821px) and (prefers-reduced-motion: no-preference)", () => {
-      const panels = gsap.utils.toArray<HTMLElement>(".story-panel");
-      const marks = gsap.utils.toArray<HTMLElement>(".story-visual-mark");
-      gsap.set(panels, { autoAlpha: 0, y: 28, scale: 0.985 });
-      gsap.set(marks, { scaleX: 0, transformOrigin: "left center" });
-      gsap.set(panels[0], { autoAlpha: 1, y: 0, scale: 1 });
-      gsap.set(marks[0], { scaleX: 1 });
-
-      const timeline = gsap.timeline({
-        defaults: { ease: "power3.inOut" },
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top 82px",
-          end: "+=3200",
-          pin: stage.current,
-          scrub: 0.75,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const next = Math.min(steps.length - 1, Math.floor(self.progress * steps.length));
-            if (next !== activeRef.current) {
-              activeRef.current = next;
-              setActive(next);
-            }
-          },
+    mm.add("(min-width: 821px)", () => {
+      const trigger = ScrollTrigger.create({
+        trigger: root.current,
+        start: "top 82px",
+        end: "+=2800",
+        pin: stage.current,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const next = Math.min(steps.length - 1, Math.floor(self.progress * steps.length));
+          if (next !== activeRef.current) {
+            activeRef.current = next;
+            setActive(next);
+          }
         },
       });
-
-      for (let index = 1; index < panels.length; index += 1) {
-        timeline
-          .to(panels[index - 1], { autoAlpha: .06, y: -18, scale: .995, duration: .56 })
-          .fromTo(
-            panels[index],
-            { autoAlpha: 1, y: 24, scale: .992, clipPath: "inset(100% 0 0 0)" },
-            { autoAlpha: 1, y: 0, scale: 1, clipPath: "inset(0% 0 0 0)", duration: .52 },
-            "<0.04"
-          )
-          .set(panels[index - 1], { autoAlpha: 0 })
-          .to(marks[index], { scaleX: 1, duration: 0.32 }, "<");
-      }
-
-      return () => timeline.kill();
+      return () => trigger.kill();
     });
-
     return () => mm.revert();
   }, { scope: root, dependencies: [reducedMotion] });
 
   return (
-    <div className="learning-story" ref={root}>
+    <div className={`learning-story ${reducedMotion ? "is-reduced" : ""}`} ref={root}>
       <div className="learning-stage" ref={stage}>
         <div className="story-nav" aria-label="Learning process progress">
           {steps.map((step, index) => (
             <div className={`story-nav-item ${active === index ? "active" : ""}`} key={step.number}>
-              {active === index && <motion.span layoutId="unlumen-learning-highlight" className="story-active-highlight" transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 34 }} />}
+              {active === index && <motion.span layoutId="unlumen-learning-highlight" className="story-active-highlight" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
               <span className="story-nav-number">{step.number}</span>
               <span>{step.short}</span>
             </div>
           ))}
         </div>
 
-        <div className="story-canvas">
-          {steps.map((step, index) => (
-            <article className="story-panel" key={step.number}>
-              <div className="story-symbol" aria-hidden="true">
-                <span>{step.symbol}</span>
-                <i className="story-orbit one" /><i className="story-orbit two" />
-                <b className="story-visual-mark" />
-              </div>
-              <div className="story-copy">
-                <span className="panel-index">{step.number} / 05</span>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </div>
-            </article>
-          ))}
+        <div className="story-canvas story-desktop-canvas" aria-live="polite">
+          <StoryPanel key={steps[active].number} step={steps[active]} animated />
         </div>
-        <p className="story-instruction"><span aria-hidden="true">↓</span> Scroll to move through the learning process</p>
+
+        <div className="story-mobile-list">
+          {steps.map((step) => <StoryPanel key={step.number} step={step} />)}
+        </div>
+
+        <p className="story-instruction"><span aria-hidden="true">↓</span>{active === 4 ? " Continue to Classes 1–10" : " Scroll to move through the learning process"}</p>
       </div>
       <p className="draft-note story-draft">A draft process for discussion—final wording will reflect the teacher’s actual method.</p>
     </div>
