@@ -22,8 +22,8 @@
 .page-progress { position: fixed; z-index: 250; top: 0; left: 0; right: 0; height: 3px; transform-origin: 0 50%; background: var(--rust); pointer-events: none; }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-body { margin: 0; color: var(--ink); background: var(--chalk); font-family: var(--sans); font-size: 16px; line-height: 1.6; text-rendering: optimizeLegibility; }
+html { overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 90px; }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: var(--chalk); font-family: var(--sans); font-size: 16px; line-height: 1.6; text-rendering: optimizeLegibility; }
 button, input, select, textarea { font: inherit; }
 a { color: inherit; text-decoration: none; }
 p, h1, h2, h3 { margin-top: 0; }
@@ -183,6 +183,7 @@ em { font-family: var(--serif); font-weight: 450; }
 .light-note { color: #9fa9a2; }
 
 /* Shared headings */
+.classes-section, .subjects-section, .mode-section, .experience-section, .faq-section, .contact-section { overflow-x: clip; }
 .approach-section, .classes-section, .subjects-section, .faq-section { padding: 130px 0; }
 .section-heading { margin-bottom: 84px; }
 .split-heading { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
@@ -590,15 +591,35 @@ em { font-family: var(--serif); font-weight: 450; }
   .footer-bottom span:last-child { grid-column: 1 / -1; text-align: left; }
 }
 
+
+.motion-control { position: fixed; z-index: 210; right: max(14px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); min-height: 38px; display: inline-flex; align-items: center; gap: 9px; padding: 8px 11px; color: var(--ink); background: rgba(255,253,248,.92); border: 1px solid var(--rule); box-shadow: 0 8px 24px rgba(23,33,27,.1); backdrop-filter: blur(10px); cursor: pointer; font-size: .6rem; font-weight: 750; letter-spacing: .055em; text-transform: uppercase; transition: transform 180ms var(--ease-out-expo), background 180ms ease; }
+.motion-control:hover { transform: translateY(-2px); background: var(--paper); }
+.motion-control:active { transform: scale(.98); }
+.motion-control-icon { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+.motion-control-icon i { width: 2px; height: 12px; background: var(--rust); transform-origin: center; animation: motionMeter 900ms ease-in-out infinite alternate; }
+.motion-control-icon i:nth-child(2) { animation-delay: -300ms; }
+.motion-control-icon i:nth-child(3) { animation-delay: -600ms; }
+@keyframes motionMeter { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
+
+html[data-motion="reduced"] { scroll-behavior: auto; }
+html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-motion="reduced"] *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+html[data-motion="reduced"] .reveal { opacity: 1; transform: none; }
+html[data-motion="reduced"] .hero-annotation path, html[data-motion="reduced"] .desk-mark path, html[data-motion="reduced"] .notebook-page svg path, html[data-motion="reduced"] .mode-icon svg *, html[data-motion="reduced"] .mode-world-visual > svg path { stroke-dashoffset: 0; animation-delay: 0ms !important; }
+html[data-motion="reduced"] .page-progress { display: none; }
+html[data-motion="reduced"] .scroll-word { transform: none !important; opacity: 1 !important; }
+html[data-motion="reduced"] .learning-stage { min-height: 0; max-height: none; display: block; overflow: visible; }
+html[data-motion="reduced"] .story-nav, html[data-motion="reduced"] .story-instruction { display: none; }
+html[data-motion="reduced"] .story-canvas { min-height: 0; }
+html[data-motion="reduced"] .story-panel { position: relative; inset: auto; opacity: 1 !important; visibility: visible !important; transform: none !important; border-bottom: 1px solid var(--rule); }
+
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  .reveal { opacity: 1; transform: none; }
-  .hero-annotation path, .desk-mark path, .notebook-page svg path, .mode-icon svg *, .mode-world-visual > svg path { stroke-dashoffset: 0; animation-delay: 0ms !important; }
-  .page-progress { display: none; }
-  .scroll-word { transform: none !important; opacity: 1 !important; }
-  .learning-stage { min-height: 0; max-height: none; display: block; overflow: visible; }
-  .story-nav, .story-instruction { display: none; }
-  .story-canvas { min-height: 0; }
-  .story-panel { position: relative; inset: auto; opacity: 1 !important; visibility: visible !important; transform: none !important; border-bottom: 1px solid var(--rule); }
+  html:not([data-motion="full"]) { scroll-behavior: auto; }
+  html:not([data-motion="full"]) *, html:not([data-motion="full"]) *::before, html:not([data-motion="full"]) *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  html:not([data-motion="full"]) .hero-annotation path, html:not([data-motion="full"]) .desk-mark path, html:not([data-motion="full"]) .notebook-page svg path, html:not([data-motion="full"]) .mode-icon svg *, html:not([data-motion="full"]) .mode-world-visual > svg path { stroke-dashoffset: 0; animation-delay: 0ms !important; }
+  html:not([data-motion="full"]) .page-progress { display: none; }
+  html:not([data-motion="full"]) .scroll-word { transform: none !important; opacity: 1 !important; }
+  html:not([data-motion="full"]) .learning-stage { min-height: 0; max-height: none; display: block; overflow: visible; }
+  html:not([data-motion="full"]) .story-nav, html:not([data-motion="full"]) .story-instruction { display: none; }
+  html:not([data-motion="full"]) .story-canvas { min-height: 0; }
+  html:not([data-motion="full"]) .story-panel { position: relative; inset: auto; opacity: 1 !important; visibility: visible !important; transform: none !important; border-bottom: 1px solid var(--rule); }
 }

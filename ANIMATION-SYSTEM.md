@@ -70,10 +70,13 @@
 - WebGL pauses offscreen and when the document is hidden
 - `will-change` is temporary and cleared after entrance animations
 
-## Reduced motion
+## Motion preference and reduced motion
 
-- Global section transforms are skipped
-- Learning story becomes a static sequence
+- The art-directed default is Full Motion so the intended experience remains visible in preview environments that force OS-level reduced motion
+- A persistent, keyboard-accessible control cycles through Full, Reduced, and System preferences
+- The preference is stored locally and applied through `data-motion`
+- In Reduced/System-reduced mode, global section transforms are skipped
+- The learning story becomes a static sequence
 - WebGL becomes a still frame
 - Scroll-linked quote transforms are overridden
 - Component transitions become instant or short opacity changes
@@ -89,3 +92,5 @@
 - Expensive hover padding animation replaced with transform
 - Initial render/hydration states made deterministic
 - Mobile pinned story disabled and converted to stacked reading order
+- Chromium installed and used for desktop/mobile screenshots and automated runtime checks
+- Chromium QA confirmed zero console/page errors, no hidden reveal content after scrolling, no horizontal overflow, and working Full/Reduced mode switching

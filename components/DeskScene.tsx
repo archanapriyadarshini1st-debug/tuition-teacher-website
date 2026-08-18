@@ -4,13 +4,13 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { useReducedMotion } from "motion/react";
+import { useSiteMotion } from "./MotionPreferences";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function DeskScene() {
   const root = useRef<HTMLDivElement>(null);
-  const reducedMotion = useReducedMotion();
+  const { reduced: reducedMotion } = useSiteMotion();
 
   useGSAP(() => {
     if (reducedMotion || !root.current) return;

@@ -1,17 +1,18 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
+import { motion, useScroll, useSpring } from "motion/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
+import { useSiteMotion } from "./MotionPreferences";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const enterEase = "power3.out";
 
 export default function MotionSystem() {
-  const reduceMotion = useReducedMotion();
+  const { reduced: reduceMotion } = useSiteMotion();
   const { scrollYProgress } = useScroll();
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 115,
@@ -71,6 +72,7 @@ export default function MotionSystem() {
             from.clipPath = "inset(0 0 16% 0)";
           }
 
+          const triggerStart = desktop ? "top 86%" : "top 91%";
           gsap.fromTo(item, from, {
             autoAlpha: 1,
             x: 0,
@@ -82,11 +84,29 @@ export default function MotionSystem() {
             clearProps: "willChange",
             scrollTrigger: {
               trigger: item,
-              start: desktop ? "top 86%" : "top 91%",
+              start: triggerStart,
               toggleActions: "play none none none",
               once: true,
             },
           });
+
+          // A second, tighter typographic beat gives headings an editorial line-reveal feel.
+          const heading = item.querySelector<HTMLElement>("h2:not(.scroll-reveal-quote)");
+          if (heading) {
+            gsap.fromTo(heading,
+              { autoAlpha: 0, y: desktop ? 24 : 14, clipPath: "inset(0 0 20% 0)", willChange: "transform,opacity,clip-path" },
+              {
+                autoAlpha: 1,
+                y: 0,
+                clipPath: "inset(0 0 0% 0)",
+                duration: .82,
+                delay: .08,
+                ease: enterEase,
+                clearProps: "willChange",
+                scrollTrigger: { trigger: item, start: triggerStart, toggleActions: "play none none none", once: true },
+              }
+            );
+          }
         });
 
         // Group choreography varies by content type instead of one generic preset.

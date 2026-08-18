@@ -1,10 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useSiteMotion } from "./MotionPreferences";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -21,7 +22,7 @@ export default function LearningStory() {
   const stage = useRef<HTMLDivElement>(null);
   const activeRef = useRef(0);
   const [active, setActive] = useState(0);
-  const reducedMotion = useReducedMotion();
+  const { reduced: reducedMotion } = useSiteMotion();
 
   useGSAP(() => {
     if (reducedMotion) return;

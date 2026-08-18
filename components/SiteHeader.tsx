@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { useSiteMotion } from "./MotionPreferences";
 
 const links = [
   ["approach", "Approach"],
@@ -14,7 +15,7 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [compact, setCompact] = useState(false);
   const [active, setActive] = useState("");
-  const reduceMotion = useReducedMotion();
+  const { reduced: reduceMotion } = useSiteMotion();
 
   useEffect(() => {
     const onScroll = () => setCompact(window.scrollY > 32);
@@ -65,7 +66,7 @@ export default function SiteHeader() {
               )}
             </a>
           ))}
-          <a className={`button button-small ${active === "contact" ? "active" : ""}`} href="#contact" onClick={() => setOpen(false)}>Enquire</a>
+          <a className={`button button-small ${active === "contact" ? "active" : ""}`} href="#contact" aria-current={active === "contact" ? "location" : undefined} onClick={() => setOpen(false)}>Enquire</a>
         </nav>
         <button className="menu-button" type="button" aria-expanded={open} aria-controls="primary-navigation" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen(!open)}>
           <span /><span />

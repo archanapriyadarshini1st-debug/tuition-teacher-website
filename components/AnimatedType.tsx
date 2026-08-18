@@ -1,12 +1,13 @@
 "use client";
 
-import { animate, motion, useInView, useReducedMotion } from "motion/react";
+import { animate, motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { useSiteMotion } from "./MotionPreferences";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
 export function AnimatedHeadline() {
-  const reduceMotion = useReducedMotion();
+  const { reduced: reduceMotion } = useSiteMotion();
   const firstLine = ["Classroom", "experience,"];
   const secondLine = ["made", "personal."];
   let index = 0;
@@ -38,7 +39,7 @@ export function AnimatedHeadline() {
 function CountNumber({ end, decimals = 0, delay = 0 }: { end: number; decimals?: number; delay?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
-  const reduceMotion = useReducedMotion();
+  const { reduced: reduceMotion } = useSiteMotion();
   const [value, setValue] = useState(0);
 
   useEffect(() => {

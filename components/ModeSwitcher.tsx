@@ -1,7 +1,8 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { useSiteMotion } from "./MotionPreferences";
 
 const modes = {
   online: {
@@ -24,7 +25,7 @@ type Mode = keyof typeof modes;
 
 export default function ModeSwitcher() {
   const [active, setActive] = useState<Mode>("online");
-  const reduceMotion = useReducedMotion();
+  const { reduced: reduceMotion } = useSiteMotion();
   const mode = modes[active];
 
   function moveMode(current: Mode, key: string) {

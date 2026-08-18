@@ -1,12 +1,13 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useSiteMotion } from "./MotionPreferences";
 
 const GradientWaves = dynamic(() => import("./GradientWaves"), { ssr: false });
 
 export default function WaveChapter() {
-  const reduceMotion = useReducedMotion();
+  const { reduced: reduceMotion } = useSiteMotion();
   return (
     <section className="wave-chapter" aria-labelledby="wave-chapter-title">
       <div className="wave-background">

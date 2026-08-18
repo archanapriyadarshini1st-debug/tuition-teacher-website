@@ -1,11 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { FormEvent, useState } from "react";
+import { useSiteMotion } from "./MotionPreferences";
 
 export default function EnquiryForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
-  const reduceMotion = useReducedMotion();
+  const { reduced: reduceMotion } = useSiteMotion();
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
