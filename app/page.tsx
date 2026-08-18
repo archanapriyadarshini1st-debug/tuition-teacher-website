@@ -5,6 +5,8 @@ import EnquiryForm from "@/components/EnquiryForm";
 import MotionSystem from "@/components/MotionSystem";
 import { AnimatedHeadline, SchoolCount, TuitionCount } from "@/components/AnimatedType";
 import ScrollRevealQuote from "@/components/ScrollRevealQuote";
+import DeskScene from "@/components/DeskScene";
+import ModeSwitcher from "@/components/ModeSwitcher";
 
 const Arrow = () => <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 
@@ -31,20 +33,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="portrait-composition reveal r3">
-              <div className="portrait-frame" data-float role="img" aria-label="Teacher portrait placeholder—photography pending">
-                <span className="portrait-label">[TEACHER PORTRAIT]</span>
-                <div className="portrait-figure" aria-hidden="true">
-                  <span className="figure-head" />
-                  <span className="figure-body" />
-                </div>
-                <span className="photo-note">Authentic photography pending</span>
-              </div>
-              <svg className="hero-annotation" viewBox="0 0 130 80" aria-hidden="true"><path d="M2 64 C 28 10, 73 8, 128 21"/><path d="M117 15l11 6-10 7"/></svg>
-              <p className="margin-note"><span>TEACHING IN TWO SETTINGS</span>School classroom + focused tuition support</p>
-              <span className="coordinate top">A / 01</span>
-              <span className="coordinate bottom">CLARITY → CONFIDENCE</span>
-            </div>
+            <div className="hero-desk reveal r3"><DeskScene /></div>
           </div>
           <div className="scroll-cue page-shell"><span>Scroll to explore</span><span className="scroll-line" /></div>
         </section>
@@ -111,17 +100,14 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mode-section">
-          <div className="page-shell mode-grid" data-stagger>
-            <div className="mode-intro"><p className="eyebrow">TWO WAYS TO LEARN</p><h2>Choose the setting that works for your family.</h2></div>
-            <article className="mode online">
-              <span className="mode-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="5" y="9" width="38" height="27" rx="1"/><path d="M17 43h14M24 36v7M10 14h28"/></svg></span>
-              <span className="mode-count">01</span><h3>Online classes</h3><p>Learn from home with the platform, timings, and session format to be confirmed.</p><span className="status-dot">AVAILABLE</span>
-            </article>
-            <article className="mode offline">
-              <span className="mode-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 44S9 31 9 19a15 15 0 0130 0c0 12-15 25-15 25z"/><circle cx="24" cy="19" r="5"/></svg></span>
-              <span className="mode-count">02</span><h3>Offline classes</h3><p>Learn in person at [Location], with venue details and current timings to be confirmed.</p><span className="status-dot">AVAILABLE</span>
-            </article>
+        <section className="mode-section" data-chapter="class-mode">
+          <div className="page-shell mode-world-layout">
+            <div className="mode-world-intro" data-reveal="left">
+              <div className="section-kicker"><span>06</span><p>TWO WAYS TO LEARN</p></div>
+              <h2>One teaching approach.<br /><em>Two settings.</em></h2>
+              <p>Choose the setting that works for your family. Practical details will be added once confirmed.</p>
+            </div>
+            <div data-reveal="right"><ModeSwitcher /></div>
           </div>
         </section>
 
@@ -135,7 +121,7 @@ export default function Home() {
               </div>
             </div>
             <div className="experience-copy" data-reveal="right">
-              <div className="section-kicker light"><span>06</span><p>TEACHING EXPERIENCE</p></div>
+              <div className="section-kicker light"><span>07</span><p>TEACHING EXPERIENCE</p></div>
               <h2>Classroom perspective.<br /><em>Tuition attention.</em></h2>
               <p>[TEACHER NAME] teaches at a school as well as through private tuition—bringing experience from both learning environments.</p>
               <dl>
@@ -150,7 +136,7 @@ export default function Home() {
 
         <section className="faq-section" id="questions">
           <div className="page-shell faq-grid">
-            <div className="faq-heading" data-reveal="left"><div className="section-kicker"><span>07</span><p>FOR PARENTS</p></div><h2>Questions before<br /><em>you enquire.</em></h2><p>Clear answers help families decide whether the teaching format is a good fit.</p></div>
+            <div className="faq-heading" data-reveal="left"><div className="section-kicker"><span>08</span><p>FOR PARENTS</p></div><h2>Questions before<br /><em>you enquire.</em></h2><p>Clear answers help families decide whether the teaching format is a good fit.</p></div>
             <div data-reveal="right"><FAQ /></div>
           </div>
         </section>
@@ -158,7 +144,7 @@ export default function Home() {
         <section className="contact-section" id="contact">
           <div className="page-shell contact-grid">
             <div className="contact-copy" data-reveal="left">
-              <div className="section-kicker light"><span>08</span><p>START A CONVERSATION</p></div>
+              <div className="section-kicker light"><span>09</span><p>START A CONVERSATION</p></div>
               <h2>Tell us what your child <em>needs help with.</em></h2>
               <p>Share the student’s class, subject needs, and preferred way to learn. [TEACHER NAME] can then confirm whether the current format and availability are suitable.</p>
               <div className="contact-alternatives"><p><span>PHONE</span>[CONTACT NUMBER]</p><p><span>WHATSAPP</span>[WHATSAPP]</p><p><span>LOCATION</span>[LOCATION]</p></div>
