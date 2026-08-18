@@ -116,7 +116,7 @@ export default function Home() {
 
         <section className="experience-section" id="experience">
           <div className="page-shell experience-grid">
-            <div className="experience-visual" data-reveal="left">
+            <div className="experience-visual" data-reveal="left" data-parallax-media>
               <div className="notebook-page" data-float>
                 <span className="notebook-index">LESSON NOTE / 04</span>
                 <p>Explain it once.</p><p>Try it together.</p><p>Find the gap.</p><p className="circled">Explain it differently.</p>

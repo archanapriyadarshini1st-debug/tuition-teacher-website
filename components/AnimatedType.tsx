@@ -17,7 +17,7 @@ export function AnimatedHeadline() {
       <span className={`headline-word-mask ${accent ? "accent" : ""}`} key={text}>
         <motion.span
           className="headline-word"
-          initial={reduceMotion ? false : { transform: "translateY(108%)", opacity: 0 }}
+          initial={{ transform: "translateY(108%)", opacity: 0 }}
           animate={{ transform: "translateY(0%)", opacity: 1 }}
           transition={{ duration: reduceMotion ? 0 : 0.72, delay, ease }}
         >
@@ -35,37 +35,34 @@ export function AnimatedHeadline() {
   );
 }
 
-function useCount(end: number, decimals = 0, delay = 0) {
+function CountNumber({ end, decimals = 0, delay = 0 }: { end: number; decimals?: number; delay?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
   const reduceMotion = useReducedMotion();
-  const [value, setValue] = useState(reduceMotion ? end : 0);
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     if (!inView) return;
     if (reduceMotion) {
-      setValue(end);
-      return;
+      const frame = requestAnimationFrame(() => setValue(end));
+      return () => cancelAnimationFrame(frame);
     }
     const control = animate(0, end, {
       duration: 1.15,
       delay,
       ease,
-      onUpdate: (latest) => setValue(latest),
+      onUpdate: setValue,
     });
     return () => control.stop();
   }, [inView, reduceMotion, end, delay]);
 
-  return { ref, value: value.toFixed(decimals) };
+  return <span ref={ref}>{value.toFixed(decimals)}</span>;
 }
 
 export function TuitionCount() {
-  const { ref, value } = useCount(4.9, 1);
-  return <strong className="count-stat"><span aria-hidden="true">~</span><span ref={ref}>{value}</span><span className="sr-only">Approximately 4.9</span></strong>;
+  return <strong className="count-stat"><span aria-hidden="true">~</span><CountNumber end={4.9} decimals={1} /><span className="sr-only">Approximately 4.9</span></strong>;
 }
 
 export function SchoolCount() {
-  const first = useCount(1, 0);
-  const second = useCount(2, 0, 0.08);
-  return <strong className="count-stat"><span aria-hidden="true">~</span><span ref={first.ref}>{first.value}</span><span aria-hidden="true">–</span><span ref={second.ref}>{second.value}</span><span className="sr-only">Approximately 1 to 2</span></strong>;
+  return <strong className="count-stat"><span aria-hidden="true">~</span><CountNumber end={1} /><span aria-hidden="true">–</span><CountNumber end={2} delay={.08} /><span className="sr-only">Approximately 1 to 2</span></strong>;
 }

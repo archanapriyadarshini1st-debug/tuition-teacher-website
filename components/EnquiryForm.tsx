@@ -26,7 +26,7 @@ export default function EnquiryForm() {
   }
 
   return (
-    <motion.form className="enquiry-form" onSubmit={submit} initial={reduceMotion ? false : { opacity: 0, transform: "translateY(12px)" }} animate={{ opacity: 1, transform: "translateY(0px)" }} transition={{ duration: reduceMotion ? 0 : .42, ease: [0.23, 1, 0.32, 1] }}>
+    <motion.form className="enquiry-form" onSubmit={submit} initial={false} animate={{ opacity: 1, transform: "translateY(0px)" }} transition={{ duration: reduceMotion ? 0 : .42, ease: [0.23, 1, 0.32, 1] }}>
       <div className="field-row">
         <label>Parent or guardian name <input name="parentName" autoComplete="name" required placeholder="Your name" /></label>
         <label>Student name <span>(optional)</span><input name="studentName" autoComplete="off" placeholder="Student’s name" /></label>

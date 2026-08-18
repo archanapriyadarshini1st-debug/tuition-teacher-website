@@ -35,9 +35,9 @@ export default function WaveChapter() {
       </div>
       <div className="wave-grid" aria-hidden="true" />
       <div className="page-shell wave-content">
-        <motion.p className="eyebrow" initial={reduceMotion ? false : { opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: .6 }} transition={{ duration: .65, ease: [0.23,1,.32,1] }}>CONNECTED LEARNING / INTERLUDE</motion.p>
-        <motion.h2 id="wave-chapter-title" initial={reduceMotion ? false : { opacity: 0, y: 45 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .45 }} transition={{ duration: .85, ease: [0.23,1,.32,1] }}>Different subjects.<br /><em>One connected way of thinking.</em></motion.h2>
-        <motion.div className="wave-caption" initial={reduceMotion ? false : { opacity: 0, x: 28 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: .7 }} transition={{ duration: .7, delay: .15, ease: [0.23,1,.32,1] }}>
+        <motion.p className="eyebrow" initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: .6 }} transition={{ duration: reduceMotion ? 0 : .65, ease: [0.23,1,.32,1] }}>CONNECTED LEARNING / INTERLUDE</motion.p>
+        <motion.h2 id="wave-chapter-title" initial={{ opacity: 0, y: 45 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .45 }} transition={{ duration: reduceMotion ? 0 : .85, ease: [0.23,1,.32,1] }}>Different subjects.<br /><em>One connected way of thinking.</em></motion.h2>
+        <motion.div className="wave-caption" initial={{ opacity: 0, x: 28 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: .7 }} transition={{ duration: reduceMotion ? 0 : .7, delay: reduceMotion ? 0 : .15, ease: [0.23,1,.32,1] }}>
           <span>UNDERSTAND</span><i /><span>PRACTISE</span><i /><span>IMPROVE</span>
         </motion.div>
       </div>

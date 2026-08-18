@@ -27,18 +27,27 @@ export default function ModeSwitcher() {
   const reduceMotion = useReducedMotion();
   const mode = modes[active];
 
+  function moveMode(current: Mode, key: string) {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(key)) return;
+    const keys = Object.keys(modes) as Mode[];
+    const index = keys.indexOf(current);
+    const next = key === "Home" ? keys[0] : key === "End" ? keys[keys.length - 1] : keys[(index + (key === "ArrowRight" ? 1 : -1) + keys.length) % keys.length];
+    setActive(next);
+    document.getElementById(`mode-tab-${next}`)?.focus();
+  }
+
   return (
     <div className={`mode-world ${active}`}>
       <div className="mode-world-nav" role="tablist" aria-label="Choose a class mode">
         {(Object.keys(modes) as Mode[]).map((key) => (
-          <button key={key} role="tab" aria-selected={active === key} onClick={() => setActive(key)}>
+          <button key={key} id={`mode-tab-${key}`} role="tab" aria-selected={active === key} aria-controls="mode-world-panel" tabIndex={active === key ? 0 : -1} onClick={() => setActive(key)} onKeyDown={(event) => { if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) event.preventDefault(); moveMode(key, event.key); }}>
             {active === key && <motion.span layoutId="mode-world-highlight" className="mode-world-highlight" transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 34 }} />}
             <span>{modes[key].number}</span>{modes[key].label}
           </button>
         ))}
       </div>
 
-      <div className="mode-world-stage">
+      <div className="mode-world-stage" id="mode-world-panel" role="tabpanel" aria-labelledby={`mode-tab-${active}`} tabIndex={0}>
         <AnimatePresence mode="wait" initial={false}>
           <motion.div key={active} className="mode-world-copy" initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }} transition={{ duration: reduceMotion ? .1 : .38, ease: [0.23, 1, 0.32, 1] }}>
             <span className="eyebrow">{mode.number} / {mode.label.toUpperCase()} CLASSES</span>
