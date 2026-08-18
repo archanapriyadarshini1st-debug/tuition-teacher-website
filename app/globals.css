@@ -153,7 +153,36 @@ em { font-family: var(--serif); font-weight: 450; }
 .split-heading h2 em, .classes-heading h2 em, .subjects-grid h2 em, .faq-heading h2 em { color: var(--rust); }
 .split-heading > div:last-child > p { margin: 0; color: var(--muted); font-size: .9rem; }
 
-/* Approach */
+/* Approach — GSAP scrollytelling + Unlumen-style active highlight */
+.learning-story { position: relative; }
+.learning-stage { position: relative; min-height: calc(100vh - 82px); max-height: 860px; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; background: var(--paper); border: 1px solid var(--rule); }
+.story-nav { position: relative; z-index: 4; display: grid; grid-template-columns: repeat(5, 1fr); padding: 18px; border-bottom: 1px solid var(--rule); }
+.story-nav-item { position: relative; min-height: 52px; display: flex; align-items: center; gap: 10px; padding: 10px 13px; color: #6c756f; font-size: .72rem; font-weight: 720; }
+.story-nav-item > span:not(.story-active-highlight) { position: relative; z-index: 2; }
+.story-nav-item.active { color: var(--paper); }
+.story-active-highlight { position: absolute; z-index: 1; inset: 3px; background: var(--forest); border-radius: 3px; box-shadow: 0 8px 24px rgba(28,91,78,.14); }
+.story-nav-number { color: var(--rust); font-family: var(--serif); font-size: .72rem; }
+.story-nav-item.active .story-nav-number { color: #edbd78; }
+.story-canvas { position: relative; min-height: 430px; }
+.story-panel { position: absolute; inset: 0; display: grid; grid-template-columns: 5fr 6fr; gap: 7vw; align-items: center; padding: clamp(35px, 6vw, 88px); }
+.story-symbol { position: relative; width: min(330px, 100%); aspect-ratio: 1; display: grid; place-items: center; justify-self: center; color: var(--rust); background: #efe9dd; border: 1px solid var(--rule); overflow: hidden; }
+.story-symbol::before, .story-symbol::after { content: ""; position: absolute; background: rgba(23,33,27,.09); }
+.story-symbol::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+.story-symbol::after { top: 50%; left: 0; right: 0; height: 1px; }
+.story-symbol > span { position: relative; z-index: 3; font-family: var(--serif); font-size: clamp(3.5rem, 7vw, 7rem); font-style: italic; letter-spacing: -.07em; }
+.story-orbit { position: absolute; z-index: 2; border: 1px solid var(--rust); border-radius: 50%; opacity: .62; }
+.story-orbit.one { width: 62%; height: 62%; transform: rotate(16deg); }
+.story-orbit.two { width: 83%; height: 38%; transform: rotate(-24deg); }
+.story-visual-mark { position: absolute; z-index: 4; left: 9%; right: 9%; bottom: 14%; height: 3px; background: var(--gold); transform: rotate(-3deg); }
+.story-copy { max-width: 580px; }
+.story-copy h3 { margin: 22px 0; font-family: var(--serif); font-size: clamp(2.7rem, 4.5vw, 5rem); font-weight: 480; letter-spacing: -.05em; line-height: .93; }
+.story-copy p { max-width: 510px; color: var(--muted); font-size: 1.02rem; }
+.story-instruction { position: relative; z-index: 4; display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin: 0; padding: 12px 18px; border-top: 1px solid var(--rule); color: var(--muted); font-size: .63rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.story-instruction span { display: inline-block; color: var(--rust); animation: storyNudge 1.6s var(--ease-in-out) infinite; }
+.story-draft { margin: 12px 0 0; text-align: right; }
+@keyframes storyNudge { 0%,100% { transform: translateY(-2px); } 50% { transform: translateY(3px); } }
+
+/* Previous compact approach pattern retained for compatibility */
 .approach-widget { position: relative; }
 .step-track { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
 .step-track button { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; min-height: 84px; padding: 0 0 20px; color: #737b75; background: transparent; border: 0; text-align: left; cursor: pointer; font-weight: 700; }
@@ -366,6 +395,14 @@ em { font-family: var(--serif); font-weight: 450; }
   .opening-mark { left: -55px; }
   .thesis-support { grid-template-columns: 1fr; }
   .thesis-support .draft-note { text-align: left; }
+  .learning-stage { min-height: 0; max-height: none; display: block; overflow: visible; }
+  .story-nav, .story-instruction { display: none; }
+  .story-canvas { min-height: 0; }
+  .story-panel { position: relative; inset: auto; grid-template-columns: 3fr 5fr; gap: 30px; padding: 42px 30px; border-bottom: 1px solid var(--rule); opacity: 1 !important; visibility: visible !important; transform: none !important; }
+  .story-symbol { width: 100%; align-self: start; }
+  .story-symbol > span { font-size: clamp(2.3rem, 8vw, 4rem); }
+  .story-copy h3 { font-size: clamp(2rem, 5vw, 3rem); }
+  .story-draft { text-align: left; }
   .step-panel { grid-template-columns: 1fr 3fr; }
   .step-panel p { grid-column: 2; }
   .classes-heading { grid-template-columns: 2fr 6fr; }
@@ -415,6 +452,9 @@ em { font-family: var(--serif); font-weight: 450; }
   .section-heading { margin-bottom: 60px; }
   .split-heading > div:last-child { display: block; }
   .split-heading > div:last-child > p { margin-top: 25px; }
+  .story-panel { grid-template-columns: 1fr; gap: 26px; padding: 32px 24px; }
+  .story-symbol { width: min(230px, 78%); justify-self: start; }
+  .story-copy h3 { margin: 18px 0 12px; font-size: 2.25rem; }
   .step-track { display: flex; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
   .step-track button { min-width: 98px; min-height: 70px; }
   .track-line, .track-progress { bottom: 13px; }
@@ -460,4 +500,8 @@ em { font-family: var(--serif); font-weight: 450; }
   .reveal { opacity: 1; transform: none; }
   .hero-annotation path, .notebook-page svg path, .mode-icon svg * { stroke-dashoffset: 0; animation-delay: 0ms !important; }
   .page-progress { display: none; }
+  .learning-stage { min-height: 0; max-height: none; display: block; overflow: visible; }
+  .story-nav, .story-instruction { display: none; }
+  .story-canvas { min-height: 0; }
+  .story-panel { position: relative; inset: auto; opacity: 1 !important; visibility: visible !important; transform: none !important; border-bottom: 1px solid var(--rule); }
 }

@@ -1,5 +1,5 @@
 import SiteHeader from "@/components/SiteHeader";
-import ApproachSteps from "@/components/ApproachSteps";
+import LearningStory from "@/components/LearningStory";
 import FAQ from "@/components/FAQ";
 import EnquiryForm from "@/components/EnquiryForm";
 import MotionSystem from "@/components/MotionSystem";
@@ -79,7 +79,7 @@ export default function Home() {
               <div className="section-kicker"><span>03</span><p>THE LEARNING APPROACH</p></div>
               <div><h2>From a question<br />to <em>clarity.</em></h2><p>A clear process gives students room to understand, try, make mistakes, and improve.</p></div>
             </div>
-            <ApproachSteps />
+            <LearningStory />
           </div>
         </section>
 

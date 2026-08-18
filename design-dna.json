@@ -60,7 +60,7 @@
       "learning_process": "connected line and stateful explanation panel"
     },
     "motion": {
-      "engine": "Motion.dev plus CSS",
+      "engine": "Motion.dev for component state; GSAP ScrollTrigger for one pinned editorial sequence; CSS for micro feedback",
       "verbs": ["draw", "reveal", "connect", "confirm", "settle"],
       "enter_easing": "cubic-bezier(.23, 1, .32, 1)",
       "move_easing": "cubic-bezier(.77, 0, .175, 1)",

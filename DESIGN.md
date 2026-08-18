@@ -239,8 +239,9 @@ The five motion verbs are:
 
 - Server Components by default
 - Client code only for navigation, learning process, FAQ, form state, and motion orchestration
-- One runtime motion engine: Motion.dev
-- No Lenis, GSAP, React Spring, Anime.js, Three.js, Spline, or shader runtime
+- Motion.dev handles component states, text, counters, and active highlights
+- GSAP ScrollTrigger is restricted to the single pinned learning-story sequence
+- No Lenis, React Spring, Anime.js, Three.js, Spline, or shader runtime
 - Self-host fonts
 - Explicit image sizes and responsive sources
 - Avoid shipping component libraries for a single visual effect
