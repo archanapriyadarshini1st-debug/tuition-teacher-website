@@ -61,7 +61,7 @@ export default function MotionSystem() {
           if (item.parentElement?.matches("[data-stagger]")) return;
 
           const direction = item.dataset.reveal || "up";
-          const from: gsap.TweenVars = { autoAlpha: 0, willChange: "transform,opacity" };
+          const from: gsap.TweenVars = { autoAlpha: item.classList.contains("classes-heading") ? 1 : 0, willChange: "transform,opacity" };
           if (direction === "left") from.x = -distance;
           if (direction === "right") from.x = distance;
           if (direction === "up") from.y = distance * .85;
@@ -118,7 +118,7 @@ export default function MotionSystem() {
 
           gsap.fromTo(children,
             {
-              autoAlpha: 0,
+              autoAlpha: isClasses ? 1 : 0,
               x: (index: number) => fromX(index),
               y: isSubjects ? 16 : 20,
               willChange: "transform,opacity",
@@ -127,8 +127,8 @@ export default function MotionSystem() {
               autoAlpha: 1,
               x: 0,
               y: 0,
-              duration: isClasses ? .54 : .58,
-              stagger: isClasses ? .075 : .065,
+              duration: isClasses ? .46 : .58,
+              stagger: isClasses ? .05 : .065,
               ease: enterEase,
               clearProps: "willChange",
               scrollTrigger: {
