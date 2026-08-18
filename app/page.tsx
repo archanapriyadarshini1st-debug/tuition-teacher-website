@@ -7,6 +7,7 @@ import { AnimatedHeadline, SchoolCount, TuitionCount } from "@/components/Animat
 import ScrollRevealQuote from "@/components/ScrollRevealQuote";
 import DeskScene from "@/components/DeskScene";
 import ModeSwitcher from "@/components/ModeSwitcher";
+import WaveChapter from "@/components/WaveChapter";
 
 const Arrow = () => <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 
@@ -50,7 +51,7 @@ export default function Home() {
 
         <section className="thesis-section">
           <div className="page-shell thesis-grid">
-            <div className="section-kicker light"><span>02</span><p>A SIMPLE TEACHING BELIEF</p></div>
+            <div className="section-kicker light" data-reveal="down"><span>02</span><p>A SIMPLE TEACHING BELIEF</p></div>
             <div className="thesis-copy" data-reveal="text">
               <p className="opening-mark" aria-hidden="true">“</p>
               <ScrollRevealQuote />
@@ -74,7 +75,7 @@ export default function Home() {
 
         <section className="classes-section" id="classes">
           <div className="page-shell">
-            <div className="section-heading classes-heading">
+            <div className="section-heading classes-heading" data-reveal="left">
               <div className="section-kicker light"><span>04</span><p>CLASSES 1–10</p></div>
               <h2>Different stages.<br /><em>One attentive teacher.</em></h2>
               <p>The exact focus for each class band will be shaped around the teacher’s confirmed method, subjects, and boards.</p>
@@ -89,8 +90,8 @@ export default function Home() {
 
         <section className="subjects-section">
           <div className="page-shell subjects-grid">
-            <div className="section-kicker"><span>05</span><p>SUBJECTS</p></div>
-            <div>
+            <div className="section-kicker" data-reveal="left"><span>05</span><p>SUBJECTS</p></div>
+            <div data-reveal="right">
               <h2>Connected learning,<br />across <em>all subjects.</em></h2>
               <p className="subjects-intro">Exact class-by-class subject and board coverage will be listed here once confirmed.</p>
               <div className="subject-index" aria-label="Subjects pending confirmation" data-stagger>
@@ -99,6 +100,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <WaveChapter />
 
         <section className="mode-section" data-chapter="class-mode">
           <div className="page-shell mode-world-layout">
@@ -120,7 +123,7 @@ export default function Home() {
                 <svg aria-hidden="true" viewBox="0 0 170 70"><path d="M5 45c35-30 94-34 158-12"/><path d="M151 24l12 9-14 6"/></svg>
               </div>
             </div>
-            <div className="experience-copy" data-reveal="right">
+            <div className="experience-copy" data-reveal="up">
               <div className="section-kicker light"><span>07</span><p>TEACHING EXPERIENCE</p></div>
               <h2>Classroom perspective.<br /><em>Tuition attention.</em></h2>
               <p>[TEACHER NAME] teaches at a school as well as through private tuition—bringing experience from both learning environments.</p>
@@ -143,13 +146,13 @@ export default function Home() {
 
         <section className="contact-section" id="contact">
           <div className="page-shell contact-grid">
-            <div className="contact-copy" data-reveal="left">
+            <div className="contact-copy" data-reveal="up">
               <div className="section-kicker light"><span>09</span><p>START A CONVERSATION</p></div>
               <h2>Tell us what your child <em>needs help with.</em></h2>
               <p>Share the student’s class, subject needs, and preferred way to learn. [TEACHER NAME] can then confirm whether the current format and availability are suitable.</p>
               <div className="contact-alternatives"><p><span>PHONE</span>[CONTACT NUMBER]</p><p><span>WHATSAPP</span>[WHATSAPP]</p><p><span>LOCATION</span>[LOCATION]</p></div>
             </div>
-            <div data-reveal="right"><EnquiryForm /></div>
+            <div data-reveal="up"><EnquiryForm /></div>
           </div>
         </section>
       </main>

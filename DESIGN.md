@@ -241,7 +241,8 @@ The five motion verbs are:
 - Client code only for navigation, learning process, FAQ, form state, and motion orchestration
 - Motion.dev handles component states, text, counters, and active highlights
 - GSAP ScrollTrigger is restricted to the single pinned learning-story sequence
-- No Lenis, React Spring, Anime.js, Three.js, Spline, or shader runtime
+- OGL/WebGL is restricted to the single React Bits GradientWaves interlude, dynamically loaded with visibility pausing, reduced-motion still frame, and CSS fallback
+- No Lenis, React Spring, Anime.js, Three.js, or Spline
 - Self-host fonts
 - Explicit image sizes and responsive sources
 - Avoid shipping component libraries for a single visual effect

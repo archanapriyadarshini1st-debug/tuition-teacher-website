@@ -13,7 +13,7 @@
       "focus_accent": "#C58A18",
       "rule": "#D7D0C2",
       "distribution": "75/18/7",
-      "gradient_policy": "none in core brand system"
+      "gradient_policy": "no generic gradients; one approved brand-colored wave interlude only"
     },
     "typography": {
       "display_family": "Source Serif 4 Variable",
@@ -60,7 +60,7 @@
       "learning_process": "connected line and stateful explanation panel"
     },
     "motion": {
-      "engine": "Motion.dev for component state; GSAP ScrollTrigger for one pinned editorial sequence; CSS for micro feedback",
+      "engine": "Motion.dev for component state; GSAP ScrollTrigger for one pinned editorial sequence; CSS for micro feedback; OGL for one lazy-loaded gradient-wave interlude",
       "verbs": ["draw", "reveal", "connect", "confirm", "settle"],
       "enter_easing": "cubic-bezier(.23, 1, .32, 1)",
       "move_easing": "cubic-bezier(.77, 0, .175, 1)",
@@ -94,13 +94,14 @@
     "conditional": [
       "one authored SVG learning diagram",
       "light paper grain or dot texture",
-      "photography mask reveal"
+      "photography mask reveal",
+      "one brand-colored GradientWaves WebGL interlude with static fallback"
     ],
     "forbidden": [
-      "WebGL",
+      "WebGL outside the approved wave interlude",
       "Three.js",
       "Spline",
-      "shader backgrounds",
+      "additional shader backgrounds",
       "aurora gradients",
       "particles",
       "cursor trails",
