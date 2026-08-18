@@ -592,7 +592,8 @@ em { font-family: var(--serif); font-weight: 450; }
 }
 
 
-.motion-control { position: fixed; z-index: 210; right: max(14px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); min-height: 38px; display: inline-flex; align-items: center; gap: 9px; padding: 8px 11px; color: var(--ink); background: rgba(255,253,248,.92); border: 1px solid var(--rule); box-shadow: 0 8px 24px rgba(23,33,27,.1); backdrop-filter: blur(10px); cursor: pointer; font-size: .6rem; font-weight: 750; letter-spacing: .055em; text-transform: uppercase; transition: transform 180ms var(--ease-out-expo), background 180ms ease; }
+.motion-control { position: fixed; z-index: 210; right: max(14px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); width: 40px; height: 40px; display: inline-grid; place-items: center; padding: 0; color: var(--ink); background: rgba(255,253,248,.9); border: 1px solid var(--rule); border-radius: 50%; box-shadow: 0 8px 24px rgba(23,33,27,.1); backdrop-filter: blur(10px); cursor: pointer; transition: transform 180ms var(--ease-out-expo), background 180ms ease; }
+.motion-control > span:last-child { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .motion-control:hover { transform: translateY(-2px); background: var(--paper); }
 .motion-control:active { transform: scale(.98); }
 .motion-control-icon { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; gap: 2px; }

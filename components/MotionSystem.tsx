@@ -94,9 +94,8 @@ export default function MotionSystem() {
           const heading = item.querySelector<HTMLElement>("h2:not(.scroll-reveal-quote)");
           if (heading) {
             gsap.fromTo(heading,
-              { autoAlpha: 0, y: desktop ? 24 : 14, clipPath: "inset(0 0 20% 0)", willChange: "transform,opacity,clip-path" },
+              { y: desktop ? 24 : 14, clipPath: "inset(0 0 20% 0)", willChange: "transform,clip-path" },
               {
-                autoAlpha: 1,
                 y: 0,
                 clipPath: "inset(0 0 0% 0)",
                 duration: .82,
@@ -128,8 +127,8 @@ export default function MotionSystem() {
               autoAlpha: 1,
               x: 0,
               y: 0,
-              duration: isClasses ? .72 : .58,
-              stagger: isClasses ? .11 : .065,
+              duration: isClasses ? .54 : .58,
+              stagger: isClasses ? .075 : .065,
               ease: enterEase,
               clearProps: "willChange",
               scrollTrigger: {
