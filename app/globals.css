@@ -185,6 +185,8 @@ em { font-family: var(--serif); font-weight: 450; }
 /* Shared headings */
 .classes-section, .subjects-section, .mode-section, .experience-section, .faq-section, .contact-section { overflow-x: clip; }
 .approach-section, .classes-section, .subjects-section, .faq-section { padding: 130px 0; }
+.approach-section { padding-bottom: 48px; }
+.classes-section { padding-top: 96px; }
 .section-heading { margin-bottom: 84px; }
 .split-heading { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
 .split-heading > .section-kicker { grid-column: 1 / span 4; }

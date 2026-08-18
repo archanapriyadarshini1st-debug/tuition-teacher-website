@@ -58,9 +58,15 @@ export default function LearningStory() {
 
       for (let index = 1; index < panels.length; index += 1) {
         timeline
-          .to(panels[index - 1], { autoAlpha: 0, y: -22, scale: 0.99, duration: 0.35 })
-          .fromTo(panels[index], { autoAlpha: 0, y: 30, scale: 0.985 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.55 }, "<0.18")
-          .to(marks[index], { scaleX: 1, duration: 0.45 }, "<0.05");
+          .to(panels[index - 1], { autoAlpha: .06, y: -18, scale: .995, duration: .56 })
+          .fromTo(
+            panels[index],
+            { autoAlpha: 1, y: 24, scale: .992, clipPath: "inset(100% 0 0 0)" },
+            { autoAlpha: 1, y: 0, scale: 1, clipPath: "inset(0% 0 0 0)", duration: .52 },
+            "<0.04"
+          )
+          .set(panels[index - 1], { autoAlpha: 0 })
+          .to(marks[index], { scaleX: 1, duration: 0.32 }, "<");
       }
 
       return () => timeline.kill();
