@@ -185,8 +185,8 @@ em { font-family: var(--serif); font-weight: 450; }
 /* Shared headings */
 .classes-section, .subjects-section, .mode-section, .experience-section, .faq-section, .contact-section { overflow-x: clip; }
 .approach-section, .classes-section, .subjects-section, .faq-section { padding: 130px 0; }
-.approach-section { padding-bottom: 48px; }
-.classes-section { padding-top: 96px; }
+.approach-section { padding-bottom: 24px; }
+.classes-section { position: relative; z-index: 2; margin-top: -250px; padding-top: 340px; }
 .section-heading { margin-bottom: 84px; }
 .split-heading { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
 .split-heading > .section-kicker { grid-column: 1 / span 4; }
@@ -475,6 +475,7 @@ em { font-family: var(--serif); font-weight: 450; }
   .thesis-support { grid-template-columns: 1fr; }
   .thesis-support .draft-note { text-align: left; }
   .learning-stage { min-height: 0; max-height: none; display: block; overflow: visible; }
+  .classes-section { margin-top: 0; padding-top: 130px; }
   .story-nav, .story-instruction { display: none; }
   .story-canvas { min-height: 0; }
   .story-panel { position: relative; inset: auto; grid-template-columns: 3fr 5fr; gap: 30px; padding: 42px 30px; border-bottom: 1px solid var(--rule); opacity: 1 !important; visibility: visible !important; transform: none !important; }
